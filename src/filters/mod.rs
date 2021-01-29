@@ -1,5 +1,6 @@
 pub mod average;
 pub mod gaussian;
+pub mod median;
 
 use na::{Dynamic, MatrixSlice};
 use nalgebra as na;

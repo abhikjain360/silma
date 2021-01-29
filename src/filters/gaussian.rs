@@ -22,22 +22,10 @@ pub fn gaussian_filter<const N: usize>(
     }
 
     // getting the matrix with distances
-    let mut h = DMatrix::<f32>::from_iterator(height, width, (0..height * width).map(|_| 0f32));
     let (iheight, iwidth) = (height as isize, width as isize);
-    for x in 0..height {
-        for y in 0..width {
-            h[(x, y)] =
-                (x as isize - iheight / 2).pow(2) as f32 + (y as isize - iwidth / 2).pow(2) as f32;
-        }
-    }
-
-    // for debugging
-    for i in 0..height {
-        for j in 0..width {
-            eprint!("{}\t", h[(i, j)]);
-        }
-        eprintln!();
-    }
+    let h = DMatrix::<f32>::from_fn(height, width, |x, y| {
+        (x as isize - iheight / 2).pow(2) as f32 + (y as isize - iwidth / 2).pow(2) as f32
+    });
 
     Filter {
         height,
