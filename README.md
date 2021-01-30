@@ -10,8 +10,8 @@ Current list of things I want to add:
 - [ ] Add the following blurring filters:
     - [X] Gaussian
     - [X] Boxed
-    - [ ] Mean
-    - [ ] Bilateral
+    - [X] Mean
+    - [X] Bilateral
 - [ ] More ergonomic image handling (currently requires users to directly use [`image`][1] and [`nalgebra`][2] to allow image operations)
 - [ ] Optimize filters (eg: to Gaussian stuff in 1-D once horizontal and once vertical)
 - [ ] Thresholding and transforms
