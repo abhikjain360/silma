@@ -1,10 +1,10 @@
-use super::{conv2d, Df32, Filter};
+use super::{convolve, Df32, Filter};
 
 pub fn median_filter<const N: usize>(mut height: usize, mut width: usize) -> Filter<N> {
     Filter {
         height,
         width,
-        kernel: Box::new(move |m| {
+        kernel: Box::new(move |m, idx| {
             let mut x = [0f32; N];
             let size = (height * width) as f32;
 
@@ -36,5 +36,5 @@ pub fn triangular_filter<const N: usize>(mut height: usize, mut width: usize) ->
 }
 
 pub fn average<const N: usize>(img: &Df32<N>, kernel_size: usize) -> Df32<N> {
-    conv2d(triangular_filter(kernel_size, kernel_size), img)
+    convolve(triangular_filter(kernel_size, kernel_size), img)
 }

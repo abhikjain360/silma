@@ -1,4 +1,4 @@
-use super::{super::Df32, conv2d, Filter};
+use super::{super::Df32, convolve, Filter};
 use nalgebra::DMatrix;
 
 pub fn gaussian_kernel(dist: f32, sigma: f32) -> f32 {
@@ -30,12 +30,14 @@ pub fn gaussian_filter<const N: usize>(
     Filter {
         height,
         width,
-        kernel: Box::new(move |m| {
+        kernel: Box::new(move |m, idx| {
             let mut x = [0f32; N];
+            let diff_h = idx.0 - (height / 2);
+            let diff_v = idx.1 - (width / 2);
             for i in 0..height {
                 for j in 0..width {
                     x.iter_mut().enumerate().for_each(|(k, x)| {
-                        *x += gaussian_kernel(h[(i, j)], sigma[k]) * m[(i, j)][k]
+                        *x += gaussian_kernel(h[(i, j)], sigma[k]) * m[(diff_h + i, diff_v + j)][k]
                     });
                 }
             }
@@ -47,5 +49,5 @@ pub fn gaussian_filter<const N: usize>(
 pub fn gaussian<const N: usize>(img: &Df32<N>, sigma: f32) -> Df32<N> {
     let size = (6f32 * sigma).ceil() as usize;
     let filter = gaussian_filter(size, size, [sigma; N]);
-    conv2d(filter, img)
+    convolve(filter, img)
 }
