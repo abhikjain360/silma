@@ -1,24 +1,31 @@
-pub mod average;
+mod average;
 pub use average::*;
-pub mod gaussian;
+mod gaussian;
 pub use gaussian::*;
-pub mod median;
+mod median;
 pub use median::*;
-pub mod bilateral;
+mod bilateral;
 pub use bilateral::*;
+mod sobel;
+pub use sobel::*;
 
 use super::Df32;
 
-pub struct Filter<const N: usize> {
+pub struct Filter<const N: usize, const M: usize> {
     pub height: usize,
     pub width: usize,
-    pub kernel: Box<dyn Fn(&Df32<N>, (usize, usize)) -> [f32; N]>,
+    pub kernel: Box<dyn Fn(&Df32<N>, (usize, usize)) -> [f32; M]>,
 }
 
-pub fn convolve<const N: usize>(filter: Filter<N>, img: &Df32<N>) -> Df32<N> {
+pub fn convolve<const N: usize, const M: usize>(filter: Filter<N, M>, img: &Df32<N>) -> Df32<M> {
     use crate::util::pad;
     let img = pad(img, filter.height, filter.width);
-    let mut h = img.clone();
+    let zero = [0f32; M];
+    let mut h = Df32::<M>::from_iterator(
+        img.shape().0,
+        img.shape().1,
+        (0..img.shape().0 * img.shape().1).map(|_| zero),
+    );
 
     let half_v = filter.height / 2;
     let half_h = filter.width / 2;

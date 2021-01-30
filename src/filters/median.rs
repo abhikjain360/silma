@@ -1,6 +1,6 @@
 use super::{convolve, Df32, Filter};
 
-pub fn median_filter<const N: usize>(mut height: usize, mut width: usize) -> Filter<N> {
+pub fn median_filter<const N: usize>(mut height: usize, mut width: usize) -> Filter<N, N> {
     // make height width odd, else they create problems
     if height % 2 == 0 {
         height -= 1;

@@ -8,7 +8,7 @@ pub fn bilateral_filter<const N: usize>(
     mut width: usize,
     sigma_s: [f32; N],
     sigma_r: [f32; N],
-) -> Filter<N> {
+) -> Filter<N, N> {
     // make height width odd, else they create problems
     if height % 2 == 0 {
         height -= 1;
