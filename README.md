@@ -1,6 +1,6 @@
 # Silma
 
-A Rust library for Computer Vision. Too much missing right now to be useful, WIP. Build using [`image`][1] and [`nalgebra`][2]
+A Rust library for Computer Vision. Too much missing right now to be useful, WIP. Build using [image][1] and [nalgebra][2]
 
 Meant as a way for me to learn CV things, and I will implement as I learn.
 
@@ -11,10 +11,11 @@ Current list of things I want to add:
     - [X] Boxed
     - [X] Mean
     - [X] Bilateral
-- [ ] More ergonomic image handling (currently requires users to directly use [`image`][1] and [`nalgebra`][2] to allow image operations)
+    - [X] Sobel
+- [ ] More ergonomic image handling (currently requires users to directly use [image][1] and [nalgebra][2] to allow image operations)
 - [ ] Optimize filters (eg: to Gaussian stuff in 1-D once horizontal and once vertical)
 - [ ] Thresholding and transforms
-- [X] Canny edge detection
+- [.] Canny edge detection
 - [ ] Corner detection (Harris?)
 - [ ] Face detection
 - [ ] Hough circle and line detection
