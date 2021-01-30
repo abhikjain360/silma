@@ -5,9 +5,8 @@ A Rust library for Computer Vision. Too much missing right now to be useful, WIP
 Meant as a way for me to learn CV things, and I will implement as I learn.
 
 Current list of things I want to add:
-- [ ] Generalize the `Filter` struct to instead operate on pointers, not matrix slices
-- [ ] Functions for convolution with circular kernel, 1-D convolution
-- [ ] Add the following blurring filters:
+- [X] Generalize the `Filter` struct to instead operate on pointers, not matrix slices
+- [X] Add the following blurring filters:
     - [X] Gaussian
     - [X] Boxed
     - [X] Mean
@@ -15,7 +14,7 @@ Current list of things I want to add:
 - [ ] More ergonomic image handling (currently requires users to directly use [`image`][1] and [`nalgebra`][2] to allow image operations)
 - [ ] Optimize filters (eg: to Gaussian stuff in 1-D once horizontal and once vertical)
 - [ ] Thresholding and transforms
-- [ ] Edge detection (Canny?)
+- [X] Canny edge detection
 - [ ] Corner detection (Harris?)
 - [ ] Face detection
 - [ ] Hough circle and line detection
